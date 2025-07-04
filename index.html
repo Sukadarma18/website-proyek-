@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deteksi Tanaman Herbal</title>
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="preloading">
+  <div id="preloader"><img src="logo.png" alt="Logo" id="preloader-logo"></div>
+  <!-- Hapus hiasan kiri dan kanan -->
+  <!--<img class="hiasan hiasan-kiri" src="hiasan.png" alt="hiasan kiri" ... >-->
+  <!--<img class="hiasan hiasan-kanan" src="hiasan.png" alt="hiasan kanan" ... >-->
+  <header class="ai-header">
+    <!-- Hapus logo dan label AI Scan -->
+    <!--<img src="logo.png" alt="Logo" class="ai-logo">-->
+    <span class="ai-title"> Deteksi Tanaman Herbal</span>
+  </header>
+  <main class="ai-main">
+    <div class="ai-scan-container">
+      <div class="ai-video-wrapper">
+        <video id="video" autoplay playsinline></video>
+        <button id="detectBtn" class="ai-scan-btn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8" stroke="#ffffff" stroke-width="2" fill="#1e1e1e"/><line x1="17" y1="17" x2="22" y2="22" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg>
+          Scan
+        </button>
+      </div>
+      <div id="result" class="ai-result-card">Arahkan kamera ke tanaman herbal yang ingin dikenali</div>
+    </div>
+  </main>
+  <footer class="ai-footer">
+    <span>Powered by <b>Soma & Darma</b> &copy; 2025</span>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.4/dist/tf.min.js"></script>
+  <script src="teachablemachine-image.min.js"></script>
+  <script>
+    // Fungsi untuk membaca CSV dan mengubah ke objek
+    async function loadCSVData() {
+      const response = await fetch('data/tanaman_herbal.csv');
+      const text = await response.text();
+      const lines = text.trim().split('\n');
+      const headers = lines[0].split(';');
+      const data = {};
+      for (let i = 1; i < lines.length; i++) {
+        const row = lines[i].split(';');
+        data[row[1].toLowerCase().replace(/ /g, '_')] = {
+          nama: row[1],
+          namalatin: row[2],
+          daerahutama: row[3],
+          khasiat: row[4],
+          bagianyangdigunakan: row[5],
+          carapengolahan: row[6]
+        };
+      }
+      return data;
+    }
+
+    const URL = "model/";
+    let model, webcam, maxPredictions, herbalData;
+    let video = document.getElementById('video');
+    let detectBtn = document.getElementById('detectBtn');
+    let resultDiv = document.getElementById('result');
+
+    // Normalisasi label model ke key herbalData
+    function normalizeLabel(label) {
+      return label.toLowerCase().replace(/ /g, '_');
+    }
+
+    // Minta akses kamera saat halaman dibuka
+    async function setupCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+        video.srcObject = stream;
+      } catch (err) {
+        resultDiv.innerHTML = 'Tidak dapat mengakses kamera: ' + err.message;
+        detectBtn.disabled = true;
+      }
+    }
+
+    // Load model teachable machine
+    async function loadModel() {
+      model = await tmImage.load(URL + "model.json", URL + "metadata.json");
+      maxPredictions = model.getTotalClasses();
+    }
+
+    // Deteksi Tanaman Herbal dari frame video
+    async function predict() {
+      if (!model) {
+        resultDiv.innerHTML = 'Model belum siap.';
+        return;
+      }
+      resultDiv.innerHTML = `
+        <div class="ai-loading">
+          <span class="ai-loading-text">Mendeteksi Tanaman Herbal</span>
+          <span class="ai-dots"><span class="ai-dot">.</span><span class="ai-dot">.</span><span class="ai-dot">.</span></span>
+        </div>
+      `;
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      const prediction = await model.predict(video);
+      let best = prediction[0];
+      for (let i = 1; i < prediction.length; i++) {
+        if (prediction[i].probability > best.probability) best = prediction[i];
+      }
+      if (best.probability > 0.7) {
+        const key = normalizeLabel(best.className);
+        const data = herbalData[key];
+        if (data) {
+          resultDiv.innerHTML = '<div class="herbal-card" id="herbalCard"></div>';
+          const card = document.getElementById('herbalCard');
+          const parts = [
+            `<div class=\"herbal-title\">${data.nama}</div>`,
+            `<div class=\"herbal-section\"><b>Nama Latin</b><br>${data.namalatin}</div>`,
+            `<div class=\"herbal-section\"><b>Daerah Utama</b><br>${data.daerahutama}</div>`,
+            `<div class=\"herbal-section\"><b>Khasiat</b><br>${data.khasiat}</div>`,
+            `<div class=\"herbal-section\"><b>Bagian yang Digunakan</b><br>${data.bagianyangdigunakan}</div>`,
+            `<div class=\"herbal-section\"><b>Cara Pengolahan</b><br>${data.carapengolahan}</div>`,
+            
+          ];
+          function typeWriter(target, html, cb) {
+            let i = 0;
+            function typing() {
+              target.innerHTML = html.slice(0, i) + '<span class="ai-cursor">|</span>';
+              i++;
+              if (i <= html.length) { 
+                setTimeout(typing, 18);
+              } else {
+                target.innerHTML = html;
+                if (cb) cb();
+              }
+            }
+            typing();
+          }
+          let i = 0;
+          function showPartTypewriter() {
+            const wrapper = document.createElement('div');
+            card.appendChild(wrapper);
+            typeWriter(wrapper, parts[i], function() {
+              i++;
+              if (i < parts.length) setTimeout(showPartTypewriter, 350);
+            });
+          }
+          showPartTypewriter();
+        } else {
+          resultDiv.innerHTML = `<span class="label">${best.className}</span><br>Data detail tidak ditemukan.`;
+        }
+      } else {
+        resultDiv.innerHTML = 'Tanaman herbal tidak terdeteksi dengan yakin. Coba ulangi.';
+      }
+    }
+
+    // Inisialisasi
+    window.addEventListener('DOMContentLoaded', async () => {
+      await setupCamera();
+      await loadModel();
+      herbalData = await loadCSVData();
+      detectBtn.disabled = false;
+    });
+    detectBtn.onclick = predict;
+
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('preloader').style.display = 'none';
+        document.body.classList.remove('preloading');
+      }, 2000);
+    });
+  </script>
+</body>
+</html> 
