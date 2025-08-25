@@ -7,39 +7,44 @@
   <link rel="shortcut icon" href="assets/images/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/theme.css">
   <style>body{scroll-behavior:smooth}</style>
 </head>
 <body>
-  <header class="navbar navbar-expand-lg fixed-top bg-white border-bottom">
+  <header id="site-header" class="navbar navbar-expand-lg fixed-top nav-glass">
     <div class="container">
       <a href="#" class="navbar-brand d-flex align-items-center gap-2">
         <img src="assets/images/logo.png" width="48" alt="logo">
-        <strong>INTEGER</strong>
+        <strong class="gradient-text">INTEGER</strong>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class="mdi mdi-menu fs-2"></i>
       </button>
       <nav class="collapse navbar-collapse" id="navbar-default">
         <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="#">Beranda</a></li>
           <li class="nav-item"><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
-          <li class="nav-item ms-lg-3 my-3 my-lg-0"><a href="#login" class="btn btn-primary">Login</a></li>
+          <li class="nav-item ms-lg-3 my-3 my-lg-0"><a href="#login" class="btn btn-gradient">Login</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main class="mt-5 pt-4">
-    <section id="hero" class="bg-light py-5 py-lg-6">
+    <section id="hero" class="hero-gradient position-relative overflow-hidden py-5 py-lg-6">
+      <div class="hero-shapes">
+        <span class="blob blob-1"></span>
+        <span class="blob blob-2"></span>
+      </div>
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-lg-6">
-            <h1 class="display-4 fw-bold mb-3"><u class="text-warning"><span class="text-primary">INTEGER</span></u> - Information Technology Grand Celebration</h1>
+          <div class="col-lg-6" data-aos="fade-up">
+            <h1 class="display-4 fw-bold mb-3 gradient-text"><u class="text-warning"><span class="text-primary">INTEGER</span></u> - Information Technology Grand Celebration</h1>
             <p class="lead">Kami kembali dengan berbagai kegiatan serta kompetisi di bidang Teknologi Informasi (IT) dan non-IT.</p>
-            <a href="#kegiatan" class="btn btn-lg btn-primary mt-3"><i class="mdi mdi-book me-2"></i>Lihat Lomba</a>
+            <a href="#kegiatan" class="btn btn-lg btn-gradient mt-3"><i class="mdi mdi-book me-2"></i>Lihat Lomba</a>
           </div>
-          <div class="col-lg-5 offset-lg-1 text-center mt-4 mt-lg-0">
+          <div class="col-lg-5 offset-lg-1 text-center mt-4 mt-lg-0" data-aos="zoom-in">
             <img id="hero-image" class="img-fluid" src="assets/images/hero.png" alt="Hero">
           </div>
         </div>
@@ -50,13 +55,13 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-10">
-            <div class="bg-primary text-white p-4 p-lg-5 rounded-4">
+            <div class="bg-gradient-royal text-white p-4 p-lg-5 rounded-4">
               <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-6" data-aos="fade-right">
                   <h2 class="h1 mb-3">Dengan tema "MAGICIAN"</h2>
                   <p class="fs-5 mb-0">MAGICIAN: "Mastering Achievement, Growth, Innovation, Creativity, and Inspiring Academic Nations".</p>
                 </div>
-                <div class="col-md-6 text-center mt-4 mt-md-0">
+                <div class="col-md-6 text-center mt-4 mt-md-0" data-aos="fade-left">
                   <img src="assets/images/magician.png" class="img-fluid" alt="Tema">
                 </div>
               </div>
@@ -74,22 +79,22 @@
           <p class="fs-5 text-muted">Berikut merupakan beberapa tujuan dari diadakannya acara INTEGER</p>
         </div>
         <div class="row g-4">
-          <div class="col-6 col-lg-3 text-center">
+          <div class="col-6 col-lg-3 text-center" data-aos="fade-up" data-aos-delay="0">
             <i class="mdi mdi-cake-variant text-primary fs-1"></i>
             <h3 class="h5 fw-bold mt-2">Perayaan HUT</h3>
             <p class="mb-0 text-muted">Memperingati hari ulang tahun Jurusan TI.</p>
           </div>
-          <div class="col-6 col-lg-3 text-center">
+          <div class="col-6 col-lg-3 text-center" data-aos="fade-up" data-aos-delay="100">
             <i class="mdi mdi-hand-wave text-primary fs-1"></i>
             <h3 class="h5 fw-bold mt-2">Pengenalan Jurusan</h3>
             <p class="mb-0 text-muted">Memperkenalkan Jurusan TI kepada masyarakat.</p>
           </div>
-          <div class="col-6 col-lg-3 text-center">
+          <div class="col-6 col-lg-3 text-center" data-aos="fade-up" data-aos-delay="200">
             <i class="mdi mdi-robot text-primary fs-1"></i>
             <h3 class="h5 fw-bold mt-2">Publikasi Karya</h3>
             <p class="mb-0 text-muted">Menunjukkan karya mahasiswa TI.</p>
           </div>
-          <div class="col-6 col-lg-3 text-center">
+          <div class="col-6 col-lg-3 text-center" data-aos="fade-up" data-aos-delay="300">
             <i class="mdi mdi-pencil-ruler text-primary fs-1"></i>
             <h3 class="h5 fw-bold mt-2">Media Kreativitas</h3>
             <p class="mb-0 text-muted">Menyalurkan kreativitas dan ide mahasiswa.</p>
@@ -105,11 +110,11 @@
             <h2 class="display-5 fw-bold mb-3">Rangkaian Kegiatan</h2>
             <p class="fs-5">Pada INTEGER, terdapat beberapa kegiatan yang diadakan:</p>
             <ul class="row list-unstyled mt-4">
-              <li class="col-md-6 mb-4"><h3 class="h5 fw-bold"><i class="mdi mdi-trophy text-primary me-2"></i>Techtopia: Dreamscape</h3><p class="mb-0">Ajang kompetisi TIK untuk SMA/SMK: Programming, Packet Tracer, Desain Grafis, Fotografi.</p></li>
-              <li class="col-md-6 mb-4"><h3 class="h5 fw-bold"><i class="mdi mdi-shoe-sneaker text-primary me-2"></i>TI CUP</h3><p class="mb-0">Kompetisi fisik dan intelektual untuk mengasah kemampuan mahasiswa.</p></li>
-              <li class="col-md-6 mb-4"><h3 class="h5 fw-bold"><i class="mdi mdi-codepen text-primary me-2"></i>IT Bootcamp</h3><p class="mb-0">Program intensif meningkatkan pengetahuan dan keterampilan TI.</p></li>
-              <li class="col-md-6 mb-4"><h3 class="h5 fw-bold"><i class="mdi mdi-heart text-primary me-2"></i>Social Event</h3><p class="mb-0">Pengabdian masyarakat untuk mengembangkan jiwa sosial.</p></li>
-              <li class="col-md-6 mb-4"><h3 class="h5 fw-bold"><i class="mdi mdi-share-variant text-primary me-2"></i>Sharing Session</h3><p class="mb-0">Seminar untuk eksplorasi berbagai topik menarik dan inspiratif.</p></li>
+              <li class="col-md-6 mb-4" data-aos="fade-up"><h3 class="h5 fw-bold"><i class="mdi mdi-trophy text-primary me-2"></i>Techtopia: Dreamscape</h3><p class="mb-0">Ajang kompetisi TIK untuk SMA/SMK: Programming, Packet Tracer, Desain Grafis, Fotografi.</p></li>
+              <li class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100"><h3 class="h5 fw-bold"><i class="mdi mdi-shoe-sneaker text-primary me-2"></i>TI CUP</h3><p class="mb-0">Kompetisi fisik dan intelektual untuk mengasah kemampuan mahasiswa.</p></li>
+              <li class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200"><h3 class="h5 fw-bold"><i class="mdi mdi-codepen text-primary me-2"></i>IT Bootcamp</h3><p class="mb-0">Program intensif meningkatkan pengetahuan dan keterampilan TI.</p></li>
+              <li class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300"><h3 class="h5 fw-bold"><i class="mdi mdi-heart text-primary me-2"></i>Social Event</h3><p class="mb-0">Pengabdian masyarakat untuk mengembangkan jiwa sosial.</p></li>
+              <li class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400"><h3 class="h5 fw-bold"><i class="mdi mdi-share-variant text-primary me-2"></i>Sharing Session</h3><p class="mb-0">Seminar untuk eksplorasi berbagai topik menarik dan inspiratif.</p></li>
             </ul>
           </div>
         </div>
@@ -124,8 +129,8 @@
           <p class="fs-5 text-muted">Berikut beberapa lomba yang bisa diikuti:</p>
         </div>
         <div class="row g-4 justify-content-center">
-          <div class="col-md-6">
-            <div class="card shadow-lg h-100">
+          <div class="col-md-6" data-aos="zoom-in">
+            <div class="card shadow-lg h-100 card-hover-lift gradient-border-top">
               <div class="card-body">
                 <h3 class="h4 fw-bold">Lomba Packet Tracer</h3>
                 <p class="mb-2">Gelombang Pendaftaran:</p>
@@ -135,13 +140,13 @@
                 </ul>
               </div>
               <div class="card-footer d-flex flex-column flex-sm-row gap-2">
-                <a href="#" class="btn btn-primary w-100 w-sm-auto"><i class="mdi mdi-book me-2"></i>Daftar Sekarang</a>
+                <a href="#" class="btn btn-gradient w-100 w-sm-auto"><i class="mdi mdi-book me-2"></i>Daftar Sekarang</a>
                 <a href="#" class="btn btn-outline-primary w-100 w-sm-auto"><i class="mdi mdi-book-open me-2"></i>Buku Panduan</a>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="card shadow-lg h-100">
+          <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card shadow-lg h-100 card-hover-lift gradient-border-top">
               <div class="card-body">
                 <h3 class="h4 fw-bold">Lomba Photography</h3>
                 <p class="mb-2">Gelombang Pendaftaran:</p>
@@ -151,7 +156,7 @@
                 </ul>
               </div>
               <div class="card-footer d-flex flex-column flex-sm-row gap-2">
-                <a href="#" class="btn btn-primary w-100 w-sm-auto"><i class="mdi mdi-book me-2"></i>Daftar Sekarang</a>
+                <a href="#" class="btn btn-gradient w-100 w-sm-auto"><i class="mdi mdi-book me-2"></i>Daftar Sekarang</a>
                 <a href="#" class="btn btn-outline-primary w-100 w-sm-auto"><i class="mdi mdi-book-open me-2"></i>Buku Panduan</a>
               </div>
             </div>
@@ -163,7 +168,7 @@
     <section id="faq" class="py-5 bg-light">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8">
+          <div class="col-lg-8" data-aos="fade-up">
             <h2 class="display-6 fw-bold text-center mb-3">Pertanyaan Umum Seputar <span class="text-primary">INTEGER</span></h2>
             <p class="lead text-muted text-center mb-4">Berikut beberapa pertanyaan yang sering diajukan</p>
             <div class="accordion" id="accordionExample">
@@ -235,6 +240,9 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <button id="backToTop" class="btn btn-gradient back-to-top" aria-label="Kembali ke atas"><i class="mdi mdi-arrow-up"></i></button>
 </body>
 </html>
