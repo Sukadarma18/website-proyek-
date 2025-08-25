@@ -1,0 +1,4 @@
+/* Custom theme overrides to resemble original site */
+:root{--bs-primary:#5a5cf6}
+#hero-image{animation:breathing 3s ease-in-out infinite alternate}
+@keyframes breathing{0%{transform:scale(1)}100%{transform:scale(1.05)}}
